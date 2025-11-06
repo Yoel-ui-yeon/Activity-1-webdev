@@ -1,0 +1,18 @@
+security:
+    providers:
+        # A simple in-memory provider (for now, no real users)
+        app_user_provider:
+            memory: null
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            lazy: true
+            provider: app_user_provider
+
+    access_control:
+        # Protect /dashboard so only ROLE_USER can access
+        - { path: ^/dashboard, roles: ROLE_USER }
